@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+venv/
+.venv/
+
+# dbt
+dbt_project/target/
+dbt_project/dbt_packages/
+dbt_project/logs/
+
+# Data files
+data/*.csv
+data/*.json
+data/*.parquet
+
+# PostgreSQL
+*.sql~
+
+# Docker
+.docker/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/
