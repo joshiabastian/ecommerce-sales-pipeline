@@ -28,3 +28,7 @@ Thumbs.db
 
 # VSCode
 .vscode/
+
+# Logs
+*.log
+logs/
