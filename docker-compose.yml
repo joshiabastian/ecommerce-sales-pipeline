@@ -28,26 +28,25 @@ services:
     networks:
       - ecommerce_network
 
-dbt:
-  build:
-    context: ./dbt_project
-    dockerfile: Dockerfile
-  container_name: ecommerce_dbt
-  env_file:
-    - .env
-  environment:
-    POSTGRES_HOST: postgres
-  volumes:
-    - ./dbt_project:/usr/app/dbt
-  depends_on:
-    - postgres
-  networks:
-    - ecommerce_network
-  entrypoint: ["tail", "-f", "/dev/null"]
+  dbt:
+    build:
+      context: ./dbt_project
+      dockerfile: Dockerfile
+    container_name: ecommerce_dbt
+    env_file:
+      - .env
+    environment:
+      POSTGRES_HOST: postgres
+    volumes:
+      - ./dbt_project:/usr/app/dbt
+    depends_on:
+      - postgres
+    networks:
+      - ecommerce_network
+    entrypoint: ["tail", "-f", "/dev/null"]
 
 volumes:
   postgres_data:
-
 networks:
   ecommerce_network:
     driver: bridge
