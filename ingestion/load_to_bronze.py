@@ -1,6 +1,7 @@
 import os
 import logging
 import pandas as pd
+import numpy as np
 import psycopg2
 from dotenv import load_dotenv
 
@@ -45,10 +46,13 @@ def load_csv_to_bronze(file_path, table_name, conn):
         cursor = conn.cursor()
 
         for _, row in df.iterrows():
-            placeholders = ", ".join(["%s"] * len(row))
+            # Replace NaN/NaT with None per value
+            values = [None if pd.isna(v) else v for v in row]
+
+            placeholders = ", ".join(["%s"] * len(values))
             columns = ", ".join(row.index)
             sql = f"INSERT INTO bronze.{table_name} ({columns}) VALUES ({placeholders})"
-            cursor.execute(sql, tuple(row))
+            cursor.execute(sql, values)
 
         conn.commit()
         cursor.close()
