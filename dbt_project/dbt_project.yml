@@ -18,6 +18,8 @@ clean-targets:
 models:
   ecommerce_pipeline:
     silver:
+      +schema: silver
       +materialized: view
     gold:
+      +schema: gold
       +materialized: table
