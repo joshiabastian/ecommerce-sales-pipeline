@@ -45,6 +45,23 @@ services:
       - ecommerce_network
     entrypoint: ["tail", "-f", "/dev/null"]
 
+  ingestion:
+    build:
+      context: ./ingestion
+      dockerfile: Dockerfile
+    container_name: ecommerce_ingestion
+    env_file:
+      - .env
+    environment:
+      POSTGRES_HOST: postgres
+    volumes:
+      - ./ingestion:/usr/app/ingestion
+      - ./data:/usr/app/ingestion/data
+    depends_on:
+      - postgres
+    networks:
+      - ecommerce_network
+
 volumes:
   postgres_data:
 networks:
