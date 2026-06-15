@@ -36,7 +36,7 @@ def get_connection():
         raise
 
 
-# Load CSV to bronze table
+# Load CSV to bronze
 def load_csv_to_bronze(file_path, table_name, conn):
     try:
         logger.info(f"Loading {file_path} -> bronze.{table_name}")
